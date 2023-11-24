@@ -95,6 +95,44 @@ class AddressBookList {
             System.out.println("-------------------------");
         }
     }
+    /**
+     * Edits an existing contact using their first and last names.
+     * Prompts the user to enter new information for the contact.
+     *
+     * @param firstName The first name of the contact to be edited.
+     * @param lastName  The last name of the contact to be edited.
+     */
+    public void editContact(String firstName, String lastName) {
+        for (Contact contact : contacts) {
+            if (contact.firstName.equals(firstName) && contact.lastName.equals(lastName)) {
+                Scanner scanner = new Scanner(System.in);
+
+                System.out.println("Enter new information for the contact:");
+                System.out.print("Address: ");
+                contact.address = scanner.nextLine();
+
+                System.out.print("City: ");
+                contact.city = scanner.nextLine();
+
+                System.out.print("State: ");
+                contact.state = scanner.nextLine();
+
+                System.out.print("ZIP Code: ");
+                contact.zip = scanner.nextLine();
+
+                System.out.print("Phone Number: ");
+                contact.phoneNumber = scanner.nextLine();
+
+                System.out.print("Email: ");
+                contact.email = scanner.nextLine();
+
+                System.out.println("Contact updated successfully.");
+                return;
+            }
+        }
+
+        System.out.println("Contact not found. Unable to edit.");
+    }
 }
 
 public class AddressBook {
@@ -110,7 +148,8 @@ public class AddressBook {
             // Display menu
             System.out.println("1. Add a new contact");
             System.out.println("2. View all contacts");
-            System.out.println("3. Exit");
+            System.out.println("3. Edit an existing contact");
+            System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
 
@@ -155,7 +194,19 @@ public class AddressBook {
                     break;
 
                 case 3:
-                    System.out.println("Exiting the program.");
+                    // Edit an existing contact
+                    System.out.println("Enter the name of the contact to edit:");
+                    System.out.print("First Name: ");
+                    String editFirstName = scanner.next();
+
+                    System.out.print("Last Name: ");
+                    String editLastName = scanner.next();
+
+                    addressBook.editContact(editFirstName, editLastName);
+                    break;
+
+                case 4:
+                    System.out.println("Exiting the program. Goodbye!");
                     break;
 
                 default:
@@ -163,7 +214,7 @@ public class AddressBook {
                     break;
             }
 
-        } while (choice != 3);
+        } while (choice != 4);
 
         scanner.close();
     }
