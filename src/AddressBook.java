@@ -7,6 +7,9 @@ import java.util.Scanner;
  * The Contact class represents a person's contact information.
  * It includes fields for the first name, last name, address,
  * city, state, ZIP code, phone number, and email.
+ *
+ * This class provides a constructor to initialize a new contact
+ * and a method to display the contact information.
  */
 class Contact {
     // Fields representing contact information
@@ -61,7 +64,9 @@ class Contact {
 
 /**
  * The AddressBook class represents a collection of contacts.
- * It provides methods to add a new contact and display all contacts.
+ * It provides methods to add a new contact, display all contacts,
+ * edit an existing contact, delete a contact using their name,
+ * and add multiple persons to the address book.
  */
 class AddressBookList {
     // List to store contacts
@@ -88,9 +93,7 @@ class AddressBookList {
      * Displays all contacts in the address book.
      */
     public void displayAllContacts() {
-        System.out.println();
         System.out.println("Address Book Contacts:");
-        System.out.println("-------------------------");
         for (Contact contact : contacts) {
             contact.displayContact();
             System.out.println("-------------------------");
@@ -157,7 +160,7 @@ class AddressBookList {
     }
 }
 
-public class AddressBook {
+public class AddressBook{
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -167,7 +170,7 @@ public class AddressBook {
         int choice;
 
         do {
-            /// Display menu
+            // Display menu
             System.out.println("1. Add a new contact");
             System.out.println("2. View all contacts");
             System.out.println("3. Edit an existing contact");
@@ -178,37 +181,42 @@ public class AddressBook {
 
             switch (choice) {
                 case 1:
-                    // Get contact information from the user
-                    System.out.println("Enter Contact Information:");
-                    System.out.print("First Name: ");
-                    String firstName = scanner.next();
+                    // Add multiple persons to the address book
+                    System.out.print("Enter the number of persons to add: ");
+                    int numberOfPersons = scanner.nextInt();
 
-                    System.out.print("Last Name: ");
-                    String lastName = scanner.next();
+                    for (int i = 0; i < numberOfPersons; i++) {
+                        System.out.println("Enter Contact Information for Person " + (i + 1) + ":");
+                        System.out.print("First Name: ");
+                        String newFirstName = scanner.next();
 
-                    System.out.print("Address: ");
-                    String address = scanner.next();
+                        System.out.print("Last Name: ");
+                        String newLastName = scanner.next();
 
-                    System.out.print("City: ");
-                    String city = scanner.next();
+                        System.out.print("Address: ");
+                        String newAddress = scanner.next();
 
-                    System.out.print("State: ");
-                    String state = scanner.next();
+                        System.out.print("City: ");
+                        String newCity = scanner.next();
 
-                    System.out.print("ZIP Code: ");
-                    String zip = scanner.next();
+                        System.out.print("State: ");
+                        String newState = scanner.next();
 
-                    System.out.print("Phone Number: ");
-                    String phoneNumber = scanner.next();
+                        System.out.print("ZIP Code: ");
+                        String newZip = scanner.next();
 
-                    System.out.print("Email: ");
-                    String email = scanner.next();
+                        System.out.print("Phone Number: ");
+                        String newPhoneNumber = scanner.next();
 
-                    // Create a new contact
-                    Contact newContact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
+                        System.out.print("Email: ");
+                        String newEmail = scanner.next();
 
-                    // Add the new contact to the address book
-                    addressBook.addContact(newContact);
+                        // Create a new contact
+                        Contact newContact = new Contact(newFirstName, newLastName, newAddress, newCity, newState, newZip, newPhoneNumber, newEmail);
+
+                        // Add the new contact to the address book
+                        addressBook.addContact(newContact);
+                    }
                     break;
 
                 case 2:
@@ -241,7 +249,7 @@ public class AddressBook {
                     break;
 
                 case 5:
-                    System.out.println("Exiting the program.");
+                    System.out.println("Exiting the program. Goodbye!");
                     break;
 
                 default:
