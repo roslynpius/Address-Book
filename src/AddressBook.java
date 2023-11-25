@@ -7,9 +7,6 @@ import java.util.Scanner;
  * The Contact class represents a person's contact information.
  * It includes fields for the first name, last name, address,
  * city, state, ZIP code, phone number, and email.
- *
- * This class provides a constructor to initialize a new contact
- * and a method to display the contact information.
  */
 class Contact {
     // Fields representing contact information
@@ -63,7 +60,7 @@ class Contact {
 }
 
 /**
- * The AddressBook class represents a collection of contacts.
+ * The AddressBookList class represents a collection of contacts.
  * It provides methods to add a new contact, display all contacts,
  * edit an existing contact, delete a contact using their name,
  * and add multiple persons to the address book.
