@@ -1,12 +1,12 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * The Contact class represents a person's contact information.
  * It includes fields for the first name, last name, address,
  * city, state, ZIP code, phone number, and email.
+ *
+ * This class provides a constructor to initialize a new contact
+ * and a method to display the contact information.
  */
 class Contact {
     // Fields representing contact information
@@ -60,7 +60,7 @@ class Contact {
 }
 
 /**
- * The AddressBookList class represents a collection of contacts.
+ * The AddressBook class represents a collection of contacts.
  * It provides methods to add a new contact, display all contacts,
  * edit an existing contact, delete a contact using their name,
  * and add multiple persons to the address book.
@@ -157,13 +157,123 @@ class AddressBookList {
     }
 }
 
-public class AddressBook{
+/**
+ * The AddressBookSystem class represents a system that manages multiple Address Books.
+ * It maintains a dictionary of Address Book names to corresponding AddressBook objects.
+ */
+class AddressBookSystem {
+    // Dictionary to store Address Books
+    private Map<String, AddressBookList> addressBooks;
+
+    /**
+     * Constructs a new AddressBookSystem with an empty dictionary of Address Books.
+     */
+    public AddressBookSystem() {
+        addressBooks = new HashMap<>();
+    }
+
+    /**
+     * Adds a new Address Book to the system.
+     *
+     * @param name The unique name of the Address Book.
+     */
+    public void addAddressBook(String name) {
+        if (!addressBooks.containsKey(name)) {
+            AddressBookList newAddressBook = new AddressBookList();
+            addressBooks.put(name, newAddressBook);
+            System.out.println("Address Book '" + name + "' added to the system.");
+        } else {
+            System.out.println("An Address Book with the name '" + name + "' already exists.");
+        }
+    }
+
+    /**
+     * Displays all Address Books in the system.
+     */
+    public void displayAllAddressBooks() {
+        System.out.println("Address Books in the System:");
+        for (String name : addressBooks.keySet()) {
+            System.out.println(name);
+        }
+        System.out.println("-------------------------");
+    }
+
+    /**
+     * Gets the Address Book with the specified name from the system.
+     *
+     * @param name The name of the Address Book to get.
+     * @return The AddressBook object.
+     */
+    public AddressBookList getAddressBook(String name) {
+        return addressBooks.get(name);
+    }
+}
+
+public class AddressBook {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Create an AddressBook
-        AddressBookList addressBook = new AddressBookList();
+        // Create an AddressBookSystem
+        AddressBookSystem addressBookSystem = new AddressBookSystem();
 
+        int choice;
+
+        do {
+            // Display menu
+            System.out.println("1. Add a new Address Book");
+            System.out.println("2. View all Address Books");
+            System.out.println("3. Work with an Address Book");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    // Add a new Address Book
+                    System.out.print("Enter the name of the new Address Book: ");
+                    String newAddressBookName = scanner.next();
+                    addressBookSystem.addAddressBook(newAddressBookName);
+                    break;
+
+                case 2:
+                    // View all Address Books in the system
+                    addressBookSystem.displayAllAddressBooks();
+                    break;
+
+                case 3:
+                    // Work with an Address Book
+                    System.out.print("Enter the name of the Address Book to work with: ");
+                    String selectedAddressBookName = scanner.next();
+                    AddressBookList selectedAddressBook = addressBookSystem.getAddressBook(selectedAddressBookName);
+
+                    if (selectedAddressBook != null) {
+                        workWithAddressBook(selectedAddressBook, scanner);
+                    } else {
+                        System.out.println("Address Book not found.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Exiting the program. Goodbye!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option.");
+                    break;
+            }
+
+        } while (choice != 4);
+
+        scanner.close();
+    }
+
+    /**
+     * Performs operations on the specified Address Book.
+     *
+     * @param addressBook The AddressBook to work with.
+     * @param scanner     The Scanner object for user input.
+     */
+    private static void workWithAddressBook(AddressBookList addressBook, Scanner scanner) {
         int choice;
 
         do {
@@ -217,7 +327,7 @@ public class AddressBook{
                     break;
 
                 case 2:
-                    // Display all contacts in the address book
+                    // View all contacts in the address book
                     addressBook.displayAllContacts();
                     break;
 
@@ -246,7 +356,7 @@ public class AddressBook{
                     break;
 
                 case 5:
-                    System.out.println("Exiting the program. Goodbye!");
+                    System.out.println("Exiting Address Book. Returning to main menu.");
                     break;
 
                 default:
@@ -255,7 +365,5 @@ public class AddressBook{
             }
 
         } while (choice != 5);
-
-        scanner.close();
     }
 }
