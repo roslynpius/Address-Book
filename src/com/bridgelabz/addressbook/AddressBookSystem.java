@@ -12,12 +12,17 @@ import java.util.stream.Collectors;
 class AddressBookSystem {
     // Dictionary to store Address Books
     private Map<String, AddressBookList> addressBooks;
+    // Dictionary to store City-Person and State-Person associations
+    private Map<String, List<Contact>> cityPersonDictionary;
+    private Map<String, List<Contact>> statePersonDictionary;
 
     /**
-     * @desc Constructs a new AddressBookSystem with an empty dictionary of Address Books.
+     * @desc Constructs a new AddressBookSystem with an empty dictionary of Address Books and dictionaries for City-Person and State-Person associations.
      */
     public AddressBookSystem() {
         addressBooks = new HashMap<>();
+        cityPersonDictionary = new HashMap<>();
+        statePersonDictionary = new HashMap<>();
     }
 
     /**
@@ -64,10 +69,13 @@ class AddressBookSystem {
      * @return List of persons in the specified city across all Address Books.
      */
     public List<Contact> getContactsInCity(String cityName) {
-        return addressBooks.values()
+        List<Contact> personsInCity = addressBooks.values()
                 .stream()
                 .flatMap(addressBookList -> addressBookList.searchPersonInCity(cityName).stream())
                 .collect(Collectors.toList());
+
+        cityPersonDictionary.put(cityName, personsInCity);
+        return personsInCity;
     }
 
     /**
@@ -77,10 +85,31 @@ class AddressBookSystem {
      * @return List of persons in the specified state across all Address Books.
      */
     public List<Contact> getContactsInState(String stateName) {
-        return addressBooks.values()
+        List<Contact> personsInState = addressBooks.values()
                 .stream()
                 .flatMap(addressBookList -> addressBookList.searchPersonInState(stateName).stream())
                 .collect(Collectors.toList());
+
+        statePersonDictionary.put(stateName, personsInState);
+        return personsInState;
+    }
+
+    /**
+     * @desc View persons by city from the City-Person dictionary.
+     * @param cityName The city to view persons for.
+     * @return List of persons in the specified city.
+     */
+    public List<Contact> viewPersonsByCity(String cityName) {
+        return cityPersonDictionary.getOrDefault(cityName, List.of());
+    }
+
+    /**
+     * @desc View persons by state from the State-Person dictionary.
+     * @param stateName The state to view persons for.
+     * @return List of persons in the specified state.
+     */
+    public List<Contact> viewPersonsByState(String stateName) {
+        return statePersonDictionary.getOrDefault(stateName, List.of());
     }
 }
 

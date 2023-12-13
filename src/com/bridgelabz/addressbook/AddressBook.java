@@ -5,6 +5,8 @@ import java.util.*;
  * @desc Class that represents creation of address book
  */
 public class AddressBook {
+
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -88,6 +90,7 @@ public class AddressBook {
      */
     private static void workWithAddressBook(AddressBookList addressBook, Scanner scanner) {
         int choice;
+        AddressBookSystem addressBookSystem = new AddressBookSystem();
 
         do {
             // Display menu
@@ -95,7 +98,9 @@ public class AddressBook {
             System.out.println("2. View all contacts");
             System.out.println("3. Edit an existing contact");
             System.out.println("4. Delete a contact");
-            System.out.println("5. Exit");
+            System.out.println("5. View persons by city");
+            System.out.println("6. View persons by state");
+            System.out.println("7. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
 
@@ -169,6 +174,22 @@ public class AddressBook {
                     break;
 
                 case 5:
+                    // View persons by city
+                    System.out.print("Enter the city to view persons for: ");
+                    String cityToView = scanner.next();
+                    List<Contact> personsByCity = addressBookSystem.viewPersonsByCity(cityToView);
+                    displaySearchResults(personsByCity);
+                    break;
+
+                case 6:
+                    // View persons by state
+                    System.out.print("Enter the state to view persons for: ");
+                    String stateToView = scanner.next();
+                    List<Contact> personsByState = addressBookSystem.viewPersonsByState(stateToView);
+                    displaySearchResults(personsByState);
+                    break;
+
+                case 7:
                     System.out.println("Exiting Address Book. Returning to the main menu.");
                     break;
 
@@ -177,7 +198,7 @@ public class AddressBook {
                     break;
             }
 
-        } while (choice != 5);
+        } while (choice != 7);
     }
 
     /**
@@ -195,4 +216,6 @@ public class AddressBook {
             }
         }
     }
+
+
 }
