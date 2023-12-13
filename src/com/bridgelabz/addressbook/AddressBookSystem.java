@@ -111,5 +111,31 @@ class AddressBookSystem {
     public List<Contact> viewPersonsByState(String stateName) {
         return statePersonDictionary.getOrDefault(stateName, List.of());
     }
+
+    /**
+     * @desc Get the count of contact persons by city across all Address Books.
+     *
+     * @return Map containing the count of contact persons by city.
+     */
+    public Map<String, Long> getCountByCity() {
+        return addressBooks.values()
+                .stream()
+                .flatMap(addressBookList -> addressBookList.getCountByCity().entrySet().stream())
+                .collect(Collectors.groupingBy(Map.Entry::getKey, Collectors.counting()));
+    }
+
+    /**
+     * @desc Get the count of contact persons by state across all Address Books.
+     *
+     * @return Map containing the count of contact persons by state.
+     */
+    public Map<String, Long> getCountByState() {
+        return addressBooks.values()
+                .stream()
+                .flatMap(addressBookList -> addressBookList.getCountByState().entrySet().stream())
+                .collect(Collectors.groupingBy(Map.Entry::getKey, Collectors.counting()));
+    }
+
+
 }
 

@@ -1,9 +1,6 @@
 package com.bridgelabz.addressbook;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -12,7 +9,7 @@ import java.util.stream.Collectors;
  *       edit an existing contact, delete a contact using their name,
  *       and add multiple persons to the address book.
  */
-class AddressBookList {
+public class AddressBookList {
     // List to store contacts
     private List<Contact> contacts;
 
@@ -131,5 +128,24 @@ class AddressBookList {
                 .filter(contact -> contact.state.equals(stateName))
                 .collect(Collectors.toList());
     }
-    
+
+    /**
+     * @desc Get the count of contact persons by city in this Address Book.
+     *
+     * @return Map containing the count of contact persons by city.
+     */
+    public Map<String, Long> getCountByCity() {
+        return contacts.stream()
+                .collect(Collectors.groupingBy(Contact::getCity, Collectors.counting()));
+    }
+
+    /**
+     * @desc Get the count of contact persons by state in this Address Book.
+     *
+     * @return Map containing the count of contact persons by state.
+     */
+    public Map<String, Long> getCountByState() {
+        return contacts.stream()
+                .collect(Collectors.groupingBy(Contact::getState, Collectors.counting()));
+    }
 }

@@ -100,7 +100,9 @@ public class AddressBook {
             System.out.println("4. Delete a contact");
             System.out.println("5. View persons by city");
             System.out.println("6. View persons by state");
-            System.out.println("7. Exit");
+            System.out.println("7. Get count of contact persons by city");
+            System.out.println("8. Get count of contact persons by state");
+            System.out.println("9. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
 
@@ -190,6 +192,18 @@ public class AddressBook {
                     break;
 
                 case 7:
+                    // Get count of contact persons by city
+                    Map<String, Long> countByCity = addressBookSystem.getCountByCity();
+                    displayCountResults(countByCity, "City");
+                    break;
+
+                case 8:
+                    // Get count of contact persons by state
+                    Map<String, Long> countByState = addressBookSystem.getCountByState();
+                    displayCountResults(countByState, "State");
+                    break;
+
+                case 9:
                     System.out.println("Exiting Address Book. Returning to the main menu.");
                     break;
 
@@ -198,7 +212,7 @@ public class AddressBook {
                     break;
             }
 
-        } while (choice != 7);
+        } while (choice != 9);
     }
 
     /**
@@ -215,6 +229,12 @@ public class AddressBook {
                 System.out.println("-------------------------");
             }
         }
+    }
+
+    private static void displayCountResults(Map<String, Long> countResults, String entityType) {
+        System.out.println("Count Results by " + entityType + ":");
+        countResults.forEach((key, value) -> System.out.println(key + ": " + value));
+        System.out.println("-------------------------");
     }
 
 

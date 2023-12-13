@@ -9,7 +9,7 @@ import java.util.Objects;
  *       This class provides a constructor to initialize a new contact
  *       and a method to display the contact information.
  */
-class Contact {
+public class Contact {
     // Fields representing contact information
     String firstName;
     String lastName;
@@ -41,6 +41,24 @@ class Contact {
         this.zip = zip;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    /**
+     * @desc Gets the city of the contact.
+     *
+     * @return The city of the contact.
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * @desc Gets the state of the contact.
+     *
+     * @return The state of the contact.
+     */
+    public String getState() {
+        return state;
     }
 
     /**
