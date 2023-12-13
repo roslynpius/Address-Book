@@ -58,6 +58,13 @@ class Contact {
         System.out.println("Email: " + email);
     }
 
+    /**
+     * @desc Overrides the equals method to compare Contact objects based on their firstName and lastName fields for equality.
+     *
+     * @param obj The object to compare with.
+     * @return True if the objects are equal, false otherwise.
+     */
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -70,6 +77,11 @@ class Contact {
         return Objects.equals(firstName, contact.firstName) && Objects.equals(lastName, contact.lastName);
     }
 
+
+    /**
+     * @desc Overrides the hashCode method to generate a hash code based on the firstName and lastName fields.
+     * @return The hash code of the object.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(firstName, lastName);
