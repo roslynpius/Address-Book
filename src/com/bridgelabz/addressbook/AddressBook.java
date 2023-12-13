@@ -2,12 +2,11 @@ package com.bridgelabz.addressbook;
 import java.util.*;
 
 /**
- * The Contact class represents a person's contact information.
- * It includes fields for the first name, last name, address,
- * city, state, ZIP code, phone number, and email.
- *
- * This class provides a constructor to initialize a new contact
- * and a method to display the contact information.
+ * @desc The Contact class represents a person's contact information.
+ *       It includes fields for the first name, last name, address,
+ *       city, state, ZIP code, phone number, and email.
+ *       This class provides a constructor to initialize a new contact
+ *       and a method to display the contact information.
  */
 class Contact {
     // Fields representing contact information
@@ -21,8 +20,7 @@ class Contact {
     String email;
 
     /**
-     * Constructs a new Contact with the specified information.
-     *
+     * @desc Constructs a new Contact with the specified information.
      * @param firstName   The first name of the contact.
      * @param lastName    The last name of the contact.
      * @param address     The address of the contact.
@@ -45,7 +43,7 @@ class Contact {
     }
 
     /**
-     * Displays the contact information on the console.
+     * @desc Displays the contact information on the console.
      */
     public void displayContact() {
         System.out.println("Contact Information:");
@@ -61,24 +59,24 @@ class Contact {
 }
 
 /**
- * The AddressBook class represents a collection of contacts.
- * It provides methods to add a new contact, display all contacts,
- * edit an existing contact, delete a contact using their name,
- * and add multiple persons to the address book.
+ * @desc The AddressBook class represents a collection of contacts.
+ *       It provides methods to add a new contact, display all contacts,
+ *       edit an existing contact, delete a contact using their name,
+ *       and add multiple persons to the address book.
  */
 class AddressBookList {
     // List to store contacts
     private List<Contact> contacts;
 
     /**
-     * Constructs a new AddressBook with an empty list of contacts.
+     * @desc Constructs a new AddressBook with an empty list of contacts.
      */
     public AddressBookList() {
         contacts = new ArrayList<>();
     }
 
     /**
-     * Adds a new contact to the address book.
+     * @desc Adds a new contact to the address book.
      *
      * @param contact The contact to be added.
      */
@@ -88,7 +86,7 @@ class AddressBookList {
     }
 
     /**
-     * Displays all contacts in the address book.
+     * @desc Displays all contacts in the address book.
      */
     public void displayAllContacts() {
         System.out.println("Address Book Contacts:");
@@ -99,8 +97,8 @@ class AddressBookList {
     }
 
     /**
-     * Edits an existing contact using their first and last names.
-     * Prompts the user to enter new information for the contact.
+     * @desc Edits an existing contact using their first and last names.
+     *       Prompts the user to enter new information for the contact.
      *
      * @param firstName The first name of the contact to be edited.
      * @param lastName  The last name of the contact to be edited.
@@ -138,7 +136,7 @@ class AddressBookList {
     }
 
     /**
-     * Deletes a contact using their first and last names.
+     * @desc Deletes a contact using their first and last names.
      *
      * @param firstName The first name of the contact to be deleted.
      * @param lastName  The last name of the contact to be deleted.
@@ -159,22 +157,22 @@ class AddressBookList {
 }
 
 /**
- * The AddressBookSystem class represents a system that manages multiple Address Books.
- * It maintains a dictionary of Address Book names to corresponding AddressBook objects.
+ * @desc The AddressBookSystem class represents a system that manages multiple Address Books.
+ *       It maintains a dictionary of Address Book names to corresponding AddressBook objects.
  */
 class AddressBookSystem {
     // Dictionary to store Address Books
     private Map<String, AddressBookList> addressBooks;
 
     /**
-     * Constructs a new AddressBookSystem with an empty dictionary of Address Books.
+     * @desc Constructs a new AddressBookSystem with an empty dictionary of Address Books.
      */
     public AddressBookSystem() {
         addressBooks = new HashMap<>();
     }
 
     /**
-     * Adds a new Address Book to the system.
+     * @desc Adds a new Address Book to the system.
      *
      * @param name The unique name of the Address Book.
      */
@@ -189,7 +187,7 @@ class AddressBookSystem {
     }
 
     /**
-     * Displays all Address Books in the system.
+     * @desc Displays all Address Books in the system.
      */
     public void displayAllAddressBooks() {
         System.out.println("Address Books in the System:");
@@ -200,7 +198,7 @@ class AddressBookSystem {
     }
 
     /**
-     * Gets the Address Book with the specified name from the system.
+     * @desc Gets the Address Book with the specified name from the system.
      *
      * @param name The name of the Address Book to get.
      * @return The AddressBook object.
@@ -269,7 +267,7 @@ public class AddressBook {
     }
 
     /**
-     * Performs operations on the specified Address Book.
+     * @desc Performs operations on the specified Address Book.
      *
      * @param addressBook The AddressBook to work with.
      * @param scanner     The Scanner object for user input.
