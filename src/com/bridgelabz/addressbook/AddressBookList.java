@@ -23,13 +23,20 @@ class AddressBookList {
     }
 
     /**
-     * @desc Adds a new contact to the address book.
+     * @desc Adds a new contact to the address book. Also checks for duplicate entry (UC-7)
      *
      * @param contact The contact to be added.
      */
     public void addContact(Contact contact) {
-        contacts.add(contact);
-        System.out.println("Contact added to the address book.");
+        // Check for duplicate using Java streams
+        boolean isDuplicate = contacts.stream().anyMatch(c -> c.equals(contact));
+
+        if (isDuplicate) {
+            System.out.println("Duplicate entry! This contact already exists in the address book.");
+        } else {
+            contacts.add(contact);
+            System.out.println("Contact added to the address book.");
+        }
     }
 
     /**

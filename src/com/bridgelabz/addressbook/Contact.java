@@ -1,5 +1,7 @@
 package com.bridgelabz.addressbook;
 
+import java.util.Objects;
+
 /**
  * @desc The Contact class represents a person's contact information.
  *       It includes fields for the first name, last name, address,
@@ -54,6 +56,23 @@ class Contact {
         System.out.println("ZIP Code: " + zip);
         System.out.println("Phone Number: " + phoneNumber);
         System.out.println("Email: " + email);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Contact contact = (Contact) obj;
+        return Objects.equals(firstName, contact.firstName) && Objects.equals(lastName, contact.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName);
     }
 }
 
