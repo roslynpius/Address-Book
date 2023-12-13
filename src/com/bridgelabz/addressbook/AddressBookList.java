@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.Comparator;
 import java.util.List;
+import java.io.*;
 
 /**
  * @desc The AddressBook class represents a collection of contacts.
@@ -14,6 +15,8 @@ import java.util.List;
 public class AddressBookList {
     // List to store contacts
     private List<Contact> contacts;
+    private static final String FILE_EXTENSION = ".txt";
+    private static final String CONTACTS_DIRECTORY = "Contacts";
 
     /**
      * @desc Constructs a new AddressBook with an empty list of contacts.
@@ -213,5 +216,54 @@ public class AddressBookList {
             System.out.println("-------------------------");
         }
     }
+
+    /**
+     * @desc Saves the contacts to a file in CSV format.
+     * @param addressBookName The name of the address book.
+     */
+    public void saveToFile(String addressBookName) {
+        File file = new File(CONTACTS_DIRECTORY + File.separator + addressBookName + FILE_EXTENSION);
+
+        try (PrintWriter writer = new PrintWriter(file)) {
+            for (Contact contact : contacts) {
+                writer.println(contact.toCsvString()); // Assuming you have a toCsvString() method in your Contact class
+            }
+            System.out.println("Contacts saved successfully to file.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to save contacts to file.");
+        }
+    }
+
+
+    /**
+     * @desc Loads contacts from a file in CSV format.
+     * @param addressBookName The name of the address book.
+     */
+    public void loadFromFile(String addressBookName) {
+        File file = new File(CONTACTS_DIRECTORY + File.separator + addressBookName + FILE_EXTENSION);
+
+        if (file.exists() && file.isFile()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    Contact contact = Contact.fromCsvString(line); // Assuming you have a fromCsvString() method in your Contact class
+                    if (!contacts.contains(contact)) {
+                        contacts.add(contact);
+                    }
+                }
+                System.out.println("Contacts loaded successfully from file.");
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Failed to load contacts from file.");
+            }
+        } else {
+            System.out.println("File does not exist. Creating a new one.");
+            // Create an empty ArrayList<Contact>
+            contacts = new ArrayList<>();
+        }
+    }
+
+
 
 }

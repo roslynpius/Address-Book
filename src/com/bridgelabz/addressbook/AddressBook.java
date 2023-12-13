@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbook;
 import java.util.*;
+import java.io.File;
 
 /**
  * @desc Class that represents creation of address book
@@ -9,9 +10,23 @@ public class AddressBook {
     private static final String ENTITY_CASE_CITY="City";
     private static final String  ENTITY_CASE_STATE="State";
     private static final String ENTITY_CASE_ZIPCODE="ZipCode";
+    private static final String CONTACTS_DIRECTORY = "Contacts";
 
 
     public static void main(String[] args) {
+
+        // Create Contacts directory if it doesn't exist
+        File contactsDirectory = new File(CONTACTS_DIRECTORY);
+        if (!contactsDirectory.exists()) {
+            boolean created = contactsDirectory.mkdir();
+            if (created) {
+                System.out.println("Contacts directory created.");
+            } else {
+                System.out.println("Failed to create Contacts directory.");
+                return;
+            }
+        }
+
         Scanner scanner = new Scanner(System.in);
 
         // Create an AddressBookSystem
@@ -50,7 +65,11 @@ public class AddressBook {
                     AddressBookList selectedAddressBook = addressBookSystem.getAddressBook(selectedAddressBookName);
 
                     if (selectedAddressBook != null) {
+                        // Load contacts from file when working with an existing Address Book
+                        selectedAddressBook.loadFromFile(selectedAddressBookName);
                         workWithAddressBook(selectedAddressBook, scanner);
+                        // Save contacts to file when exiting the Address Book
+                        selectedAddressBook.saveToFile(selectedAddressBookName);
                     } else {
                         System.out.println("Address Book not found.");
                     }

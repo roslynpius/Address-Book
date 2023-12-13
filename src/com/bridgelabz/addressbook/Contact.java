@@ -1,6 +1,6 @@
 package com.bridgelabz.addressbook;
 
-
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -10,7 +10,7 @@ import java.util.Objects;
  *       This class provides a constructor to initialize a new contact
  *       and a method to display the contact information.
  */
-public class Contact implements Comparable<Contact> {
+public class Contact implements Comparable<Contact>, Serializable{
     // Fields representing contact information
     String firstName;
     String lastName;
@@ -146,6 +146,25 @@ public class Contact implements Comparable<Contact> {
      */
     public String getZip() {
         return zip;
+    }
+
+    /**
+     * @desc Converts the contact information into a CSV (Comma-Separated Values) format string.
+     * @return A CSV format string representing the contact information.
+     */
+    public String toCsvString() {
+        return String.format("%s,%s,%s,%s,%s,%s,%s,%s", firstName, lastName, address, city, state, zip, phoneNumber, email);
+    }
+
+    /**
+     * @desc Creates a new Contact object by parsing the information from a CSV format string.
+     * @param csvString The CSV format string containing contact information.
+     * @return A new Contact object with information parsed from the CSV string.
+     */
+    public static Contact fromCsvString(String csvString) {
+        String[] parts = csvString.split(",");
+        // Assuming the order in CSV is: firstName, lastName, address, city, state, zip, phoneNumber, email
+        return new Contact(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7]);
     }
 }
 
