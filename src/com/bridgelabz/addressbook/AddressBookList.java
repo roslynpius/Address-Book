@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * @desc The AddressBook class represents a collection of contacts.
@@ -107,5 +108,27 @@ class AddressBookList {
         }
 
         System.out.println("Contact not found. Unable to delete.");
+    }
+
+    /**
+     * @desc Search for a person in a city in this Address Book.
+     * @param cityName The city to search for.
+     * @return List of persons in the specified city in this Address Book.
+     */
+    public List<Contact> searchPersonInCity(String cityName) {
+        return contacts.stream()
+                .filter(contact -> contact.city.equals(cityName))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * @desc Search for a person in a state in this Address Book.
+     * @param stateName The state to search for.
+     * @return List of persons in the specified state in this Address Book.
+     */
+    public List<Contact> searchPersonInState(String stateName) {
+        return contacts.stream()
+                .filter(contact -> contact.state.equals(stateName))
+                .collect(Collectors.toList());
     }
 }

@@ -18,7 +18,9 @@ public class AddressBook {
             System.out.println("1. Add a new Address Book");
             System.out.println("2. View all Address Books");
             System.out.println("3. Work with an Address Book");
-            System.out.println("4. Exit");
+            System.out.println("4. Search persons in a city");
+            System.out.println("5. Search persons in a state");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
 
@@ -49,7 +51,23 @@ public class AddressBook {
                     break;
 
                 case 4:
-                    System.out.println("Exiting the program. Goodbye!");
+                    // Search persons in a city
+                    System.out.print("Enter the city to search for: ");
+                    String city = scanner.next();
+                    List<Contact> personsInCity = addressBookSystem.getContactsInCity(city);
+                    displaySearchResults(personsInCity);
+                    break;
+
+                case 5:
+                    // Search persons in a state
+                    System.out.print("Enter the state to search for: ");
+                    String state = scanner.next();
+                    List<Contact> personsInState = addressBookSystem.getContactsInState(state);
+                    displaySearchResults(personsInState);
+                    break;
+
+                case 6:
+                    System.out.println("Exiting Address Book. Returning to the main menu.");
                     break;
 
                 default:
@@ -57,7 +75,7 @@ public class AddressBook {
                     break;
             }
 
-        } while (choice != 4);
+        } while (choice != 6);
 
         scanner.close();
     }
@@ -151,7 +169,7 @@ public class AddressBook {
                     break;
 
                 case 5:
-                    System.out.println("Exiting Address Book. Returning to main menu.");
+                    System.out.println("Exiting Address Book. Returning to the main menu.");
                     break;
 
                 default:
@@ -160,5 +178,21 @@ public class AddressBook {
             }
 
         } while (choice != 5);
+    }
+
+    /**
+     * @desc Helper method to display search results.
+     * @param searchResults The list of contacts to display.
+     */
+    private static void displaySearchResults(List<Contact> searchResults) {
+        System.out.println("Search Results:");
+        if (searchResults.isEmpty()) {
+            System.out.println("No matching persons found.");
+        } else {
+            for (Contact contact : searchResults) {
+                contact.displayContact();
+                System.out.println("-------------------------");
+            }
+        }
     }
 }
