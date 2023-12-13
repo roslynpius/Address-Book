@@ -231,6 +231,11 @@ public class AddressBook {
         }
     }
 
+    /**
+     * @desc Helper method to display count results.
+     * @param countResults The list of contacts to display.
+     * @param entityType Either state or city
+     */
     private static void displayCountResults(Map<String, Long> countResults, String entityType) {
         System.out.println("Count Results by " + entityType + ":");
         countResults.forEach((key, value) -> System.out.println(key + ": " + value));
