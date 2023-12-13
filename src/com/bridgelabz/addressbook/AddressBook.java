@@ -6,6 +6,10 @@ import java.util.*;
  */
 public class AddressBook {
 
+    private static final String ENTITY_CASE_CITY="City";
+    private static final String  ENTITY_CASE_STATE="State";
+    private static final String ENTITY_CASE_ZIPCODE="ZipCode";
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -95,14 +99,17 @@ public class AddressBook {
         do {
             // Display menu
             System.out.println("1. Add a new contact");
-            System.out.println("2. View all contacts");
+            System.out.println("2. View all contacts (SORTED BY NAME)"); //UC 11
             System.out.println("3. Edit an existing contact");
             System.out.println("4. Delete a contact");
             System.out.println("5. View persons by city");
             System.out.println("6. View persons by state");
             System.out.println("7. Get count of contact persons by city");
             System.out.println("8. Get count of contact persons by state");
-            System.out.println("9. Exit");
+            System.out.println("9. Sort Contacts By City");
+            System.out.println("10. Sort Contacts By State");
+            System.out.println("11. Sort Contacts By ZipCode");
+            System.out.println("12. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
 
@@ -201,16 +208,31 @@ public class AddressBook {
                 case 7:
                     // Get count of contact persons by city
                     Map<String, Long> countByCity = addressBookSystem.getCountByCity();
-                    displayCountResults(countByCity, "City");
+                    displayCountResults(countByCity, ENTITY_CASE_CITY);
                     break;
 
                 case 8:
                     // Get count of contact persons by state
                     Map<String, Long> countByState = addressBookSystem.getCountByState();
-                    displayCountResults(countByState, "State");
+                    displayCountResults(countByState, ENTITY_CASE_STATE);
                     break;
 
                 case 9:
+                    List<Contact> sortedByCity = addressBook.sortByCity();
+                    addressBook.printSorted(sortedByCity,ENTITY_CASE_CITY);
+                    break;
+
+                case 10:
+                    List<Contact> sortedByState = addressBook.sortByState();
+                    addressBook.printSorted(sortedByState,ENTITY_CASE_STATE);
+                    break;
+
+                case 11:
+                    List<Contact> sortedByZipCode = addressBook.sortByZip();
+                    addressBook.printSorted(sortedByZipCode,ENTITY_CASE_ZIPCODE);
+                    break;
+
+                case 12:
                     System.out.println("Exiting Address Book. Returning to the main menu.");
                     break;
 
@@ -219,7 +241,7 @@ public class AddressBook {
                     break;
             }
 
-        } while (choice != 9);
+        } while (choice != 12);
     }
 
     /**

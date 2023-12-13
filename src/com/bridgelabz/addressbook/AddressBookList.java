@@ -3,6 +3,7 @@ package com.bridgelabz.addressbook;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * @desc The AddressBook class represents a collection of contacts.
@@ -170,5 +171,47 @@ public class AddressBookList {
         return result.toString();
     }
 
+    /**
+     * @desc Sorts the contacts in the address book by city.
+     * @return List of contacts sorted by city.
+     */
+    public List<Contact> sortByCity() {
+        return contacts.stream()
+                .sorted(Comparator.comparing(Contact::getCity))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * @desc Sorts the contacts in the address book by state.
+     * @return List of contacts sorted by state.
+     */
+    public List<Contact> sortByState() {
+        return contacts.stream()
+                .sorted(Comparator.comparing(Contact::getState))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * @desc Sorts the contacts in the address book by ZIP code.
+     * @return List of contacts sorted by ZIP code.
+     */
+    public List<Contact> sortByZip() {
+        return contacts.stream()
+                .sorted(Comparator.comparing(Contact::getZip))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * @desc Printing contents in the desired order
+     * @param sortedByEntity Contacts sorted in a particular order
+     * @param entity Entity by which user wanted to sort contacts
+     */
+    public void printSorted(List<Contact> sortedByEntity,String entity) {
+        System.out.println("Contacts Sorted by "+entity+":");
+        for (Contact contact : sortedByEntity) {
+            System.out.println(contact);
+            System.out.println("-------------------------");
+        }
+    }
 
 }

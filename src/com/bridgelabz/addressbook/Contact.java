@@ -106,6 +106,13 @@ public class Contact implements Comparable<Contact> {
         return Objects.hash(firstName, lastName);
     }
 
+    /**
+     * @desc Compares one contact with another contact based on the person's full name.
+     *
+     * @param other The contact to compare with.
+     * @return A negative integer, zero, or a positive integer if this contact is less than, equal to,
+     *         or greater than the specified contact.
+     */
     @Override
     public int compareTo(Contact other) {
         // Compare by the person's full name (combination of first name and last name)
@@ -115,6 +122,10 @@ public class Contact implements Comparable<Contact> {
         return fullName1.compareToIgnoreCase(fullName2);
     }
 
+    /**
+     * @desc Returns a string representation of the contact.
+     * @return A string containing the contact information.
+     */
     @Override
     public String toString() {
         return "Contact Information:\n" +
@@ -126,6 +137,15 @@ public class Contact implements Comparable<Contact> {
                 "\nZIP Code: " + zip +
                 "\nPhone Number: " + phoneNumber +
                 "\nEmail: " + email + "\n";
+    }
+
+    /**
+     * Gets the ZIP code of the contact.
+     *
+     * @return The ZIP code of the contact.
+     */
+    public String getZip() {
+        return zip;
     }
 }
 
