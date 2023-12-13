@@ -2,6 +2,7 @@ package com.bridgelabz.addressbook;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.Comparator;
 
 /**
  * @desc The AddressBook class represents a collection of contacts.
@@ -148,4 +149,26 @@ public class AddressBookList {
         return contacts.stream()
                 .collect(Collectors.groupingBy(Contact::getState, Collectors.counting()));
     }
+
+    /**
+     * @desc Sorts all contacts in the address book alphabetically by person's name.
+     */
+    public void sortByName() {
+        contacts.sort(Comparator.naturalOrder());
+    }
+
+    /**
+     * @desc Overrides the toString method to finally print person entries in the console.
+     * @return A formatted string representing the address book.
+     */
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for (Contact contact : contacts) {
+            result.append(contact.toString()).append("\n");
+        }
+        return result.toString();
+    }
+
+
 }

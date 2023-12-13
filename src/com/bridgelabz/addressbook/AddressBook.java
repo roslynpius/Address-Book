@@ -148,7 +148,14 @@ public class AddressBook {
 
                 case 2:
                     // View all contacts in the address book
-                    addressBook.displayAllContacts();
+                    //addressBook.displayAllContacts();
+
+                    // Sort contacts alphabetically by name
+                    addressBook.sortByName();
+
+                    // Print sorted address book
+                    System.out.println("Sorted Address Book:");
+                    System.out.println(addressBook);
                     break;
 
                 case 3:

@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbook;
 
+
 import java.util.Objects;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Objects;
  *       This class provides a constructor to initialize a new contact
  *       and a method to display the contact information.
  */
-public class Contact {
+public class Contact implements Comparable<Contact> {
     // Fields representing contact information
     String firstName;
     String lastName;
@@ -103,6 +104,28 @@ public class Contact {
     @Override
     public int hashCode() {
         return Objects.hash(firstName, lastName);
+    }
+
+    @Override
+    public int compareTo(Contact other) {
+        // Compare by the person's full name (combination of first name and last name)
+        String fullName1 = this.firstName + " " + this.lastName;
+        String fullName2 = other.firstName + " " + other.lastName;
+
+        return fullName1.compareToIgnoreCase(fullName2);
+    }
+
+    @Override
+    public String toString() {
+        return "Contact Information:\n" +
+                "First Name: " + firstName +
+                "\nLast Name: " + lastName +
+                "\nAddress: " + address +
+                "\nCity: " + city +
+                "\nState: " + state +
+                "\nZIP Code: " + zip +
+                "\nPhone Number: " + phoneNumber +
+                "\nEmail: " + email + "\n";
     }
 }
 
